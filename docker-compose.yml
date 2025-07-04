@@ -1,10 +1,10 @@
 services:
-  ai-assistant-sandbox:
+  tooling-sandbox:
     build:
       context: .
       dockerfile: Dockerfile
     image: ai-assistant-sandbox:latest
-    container_name: ai-assistant-sandbox
+    container_name: tooling-sandbox
     user: claude
     volumes:
       - ./claude-config/claude.json:/home/claude/.claude.json
@@ -12,6 +12,8 @@ services:
       - ~/.talon/user/jackt:/home/claude/devai/talon
       - ~/dev/ai/cursor-rules:/home/claude/devai/cursor-rules
       - ~/dev/ai/assistant-sandbox:/home/claude/devai/assistant-sandbox
+      - ~/dev/ai/ai-notes/sandbox:/home/claude/devai/ai-notes/sandbox
+      - ./sandbox-instructions/tooling-claude.md:/home/claude/devai/CLAUDE.md
     environment:
       - NODE_ENV=development
     working_dir: /home/claude/devai
