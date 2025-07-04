@@ -25,12 +25,7 @@ RUN groupadd -g "$CLAUDE_GID" "$CLAUDE_USER" && \
     echo "$CLAUDE_USER ALL=(ALL) NOPASSWD: ALL" > "/etc/sudoers.d/$CLAUDE_USER" && \
     chmod 440 "/etc/sudoers.d/$CLAUDE_USER"
 
-# Copy entrypoint script and make executable
-COPY entrypoint.sh /docker-entrypoint.sh
-RUN chmod +x /docker-entrypoint.sh
-
-# Set entrypoint to handle permissions and user switch
-ENTRYPOINT ["/docker-entrypoint.sh"]
+# Remove entrypoint script for debugging - will add back later
 
 # Default command
 CMD ["/bin/bash"]
