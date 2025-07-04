@@ -1,0 +1,18 @@
+services:
+  ai-assistant-sandbox:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: ai-assistant-sandbox:latest
+    container_name: ai-assistant-sandbox
+    user: claude
+    volumes:
+      - ~/.claude.json:/root/.claude.json
+      - ~/.claude:/root/.claude
+      - ~/.talon/user/jackt:/home/claude/devai/talon
+      - ~/dev/ai/cursor-rules:/home/claude/devai/cursor-rules
+      - ~/dev/ai/assistant-sandbox:/home/claude/devai/assistant-sandbox
+    environment:
+      - NODE_ENV=development
+    working_dir: /home/claude/devai
+    command: tail -f /dev/null
