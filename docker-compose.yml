@@ -5,7 +5,6 @@ services:
       dockerfile: Dockerfile
     image: ai-assistant-sandbox:latest
     container_name: ai-assistant-sandbox
-    user: claude
     volumes:
       - ~/.claude.json:/root/.claude.json
       - ~/.claude:/root/.claude
