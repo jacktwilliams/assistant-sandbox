@@ -1,0 +1,11 @@
+# Ignore all files in claude-config directory
+*
+
+# Except for the gitignore file itself
+!.gitignore
+
+# Allow .claude directory
+!.claude/
+
+# And the settings file
+!.claude/settings.json

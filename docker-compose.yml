@@ -7,8 +7,8 @@ services:
     container_name: ai-assistant-sandbox
     user: claude
     volumes:
-      - ~/.claude.json:/root/.claude.json
-      - ~/.claude:/root/.claude
+      - ./claude-config/claude.json:/home/claude/.claude.json
+      - ./claude-config/.claude:/home/claude/.claude
       - ~/.talon/user/jackt:/home/claude/devai/talon
       - ~/dev/ai/cursor-rules:/home/claude/devai/cursor-rules
       - ~/dev/ai/assistant-sandbox:/home/claude/devai/assistant-sandbox
