@@ -1,4 +1,19 @@
+version: "3.9"
+
+networks:
+  sandbox_net:
+    driver: bridge
+    internal: true
+
 services:
+  squid:
+    image: ubuntu/squid:latest
+    networks: [sandbox_net]
+    volumes:
+      - ./squid.conf:/etc/squid/squid.conf
+    ports:
+      - "3128:3128"
+
   tooling-sandbox:
     build:
       context: .
@@ -16,5 +31,24 @@ services:
       - ./sandbox-instructions/tooling-claude.md:/home/claude/devai/CLAUDE.md
     environment:
       - NODE_ENV=development
+    working_dir: /home/claude/devai
+    command: tail -f /dev/null
+
+  restricted-sandbox:
+    image: ai-assistant-sandbox:latest
+    container_name: restricted-sandbox
+    user: claude
+    networks: [sandbox_net]
+    volumes:
+      - ./claude-config/claude.json:/home/claude/.claude.json
+      - ./claude-config/.claude:/home/claude/.claude
+      - ~/dev/ai/assistant-sandbox:/home/claude/devai/assistant-sandbox
+      - ~/dev/ai/ai-notes/sandbox:/home/claude/devai/ai-notes/sandbox
+      - ./sandbox-instructions/tooling-claude.md:/home/claude/devai/CLAUDE.md
+    environment:
+      - NODE_ENV=development
+      - HTTP_PROXY=http://squid:3128
+      - HTTPS_PROXY=http://squid:3128
+      - NO_PROXY=localhost,127.0.0.1,squid,tooling-sandbox,restricted-sandbox,172.30.0.0/16
     working_dir: /home/claude/devai
     command: tail -f /dev/null
