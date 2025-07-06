@@ -4,11 +4,13 @@ networks:
   sandbox_net:
     driver: bridge
     internal: true
+  internet_net:
+    driver: bridge
 
 services:
   squid:
     image: ubuntu/squid:latest
-    networks: [sandbox_net]
+    networks: [sandbox_net, internet_net]
     volumes:
       - ./squid.conf:/etc/squid/squid.conf
     ports:
