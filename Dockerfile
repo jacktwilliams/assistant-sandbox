@@ -10,8 +10,8 @@ RUN apt install -y curl git ripgrep nano wget sudo gosu
 RUN curl -fsSL https://deb.nodesource.com/setup_24.x | bash - && \
     apt install -y nodejs
 
-# Install Claude Code globally for all users
-RUN npm install -g @anthropic-ai/claude-code
+# Install Claude Code and Gemini CLI globally for all users
+RUN npm install -g @anthropic-ai/claude-code @google/gemini-cli
 
 # Create non-root user for Claude execution
 # Using 1001 as default to avoid conflicts with ubuntu user (usually 1000)
