@@ -6,3 +6,6 @@ Run AI assistance in a sandbox Docker container. This uses a Docker Compose file
 
 ## Restricted internet access
 In the Docker Compose example, the Tooling Sandbox service has full internet access, while the Restricted Sandbox service has limited internet access. The Squid service has a network connection to the Restricted Sandbox, but it also has an internet connection. And the Restricted Sandbox proxies through the Squid service so that it can only resolve domains that Squid is configured to allow.
+
+## Known Issues
+Gemini doesn't seem to honor the proxy environment variables, so it cannot be ran in the restricted network. Gemini also doesn't have a dangerous mode, so you don't need to run it in the restricted container.
