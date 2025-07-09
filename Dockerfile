@@ -13,6 +13,10 @@ RUN curl -fsSL https://deb.nodesource.com/setup_24.x | bash - && \
 # Install Claude Code and Gemini CLI globally for all users
 RUN npm install -g @anthropic-ai/claude-code @google/gemini-cli
 
+# Install Java 21 and Maven
+RUN apt update && \
+    apt install -y openjdk-21-jdk maven
+
 # Create non-root user for Claude execution
 # Using 1001 as default to avoid conflicts with ubuntu user (usually 1000)
 ENV CLAUDE_USER=claude \
