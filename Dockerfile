@@ -29,7 +29,22 @@ RUN groupadd -g "$CLAUDE_GID" "$CLAUDE_USER" && \
     echo "$CLAUDE_USER ALL=(ALL) NOPASSWD: ALL" > "/etc/sudoers.d/$CLAUDE_USER" && \
     chmod 440 "/etc/sudoers.d/$CLAUDE_USER"
 
-# Remove entrypoint script for debugging - will add back later
+# Copy and run personalization script if it exists
+COPY . /tmp/build-context/
+RUN if [ -f /tmp/build-context/personalization.sh ]; then \
+        cp /tmp/build-context/personalization.sh /tmp/personalization.sh && \
+        chmod +x /tmp/personalization.sh && \
+        su - "$CLAUDE_USER" -c "/tmp/personalization.sh" && \
+        rm /tmp/personalization.sh; \
+    fi && \
+    rm -rf /tmp/build-context
+
+# Configure bash history for the claude user
+RUN echo 'export HISTFILE=/home/claude/.bash_history' >> /home/claude/.bashrc && \
+    echo 'export HISTSIZE=1000' >> /home/claude/.bashrc && \
+    echo 'export HISTFILESIZE=2000' >> /home/claude/.bashrc && \
+    echo 'shopt -s histappend' >> /home/claude/.bashrc && \
+    chown claude:claude /home/claude/.bashrc
 
 # Default command
 CMD ["/bin/bash"]

@@ -3,6 +3,12 @@
 .env.local
 .env.*.local
 
+# Personalization script
+personalization.sh
+
+# Shell history files
+shell-history/
+
 # Docker volumes
 volumes/
 
