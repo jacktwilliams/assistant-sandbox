@@ -3,8 +3,8 @@ FROM ubuntu:24.04
 # Update system
 RUN apt update && apt upgrade -y
 
-# Install essential tools
-RUN apt install -y curl git ripgrep nano wget sudo gosu
+# Install essential tools including networking utilities for MCP communication
+RUN apt install -y curl git ripgrep nano wget sudo gosu socat netcat-openbsd
 
 # Install Node.js 24 (Latest LTS)
 RUN curl -fsSL https://deb.nodesource.com/setup_24.x | bash - && \

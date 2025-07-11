@@ -45,6 +45,7 @@ services:
       - ~/dev/ai/ai-notes/sandbox:/home/claude/devai/ai-notes/sandbox
       - ./sandbox-instructions/tooling-claude.md:/home/claude/devai/CLAUDE.md
       - ./shell-history/tooling-sandbox-history:/home/claude/.bash_history
+      - ./mcp-config/tooling-sandbox-mcp.json:/home/claude/.claude/mcp_settings.json
     working_dir: /home/claude/devai
     command: tail -f /dev/null
 
@@ -66,6 +67,7 @@ services:
       - ~/dev/ai/ai-notes/sandbox:/home/claude/devai/ai-notes/sandbox
       - ./sandbox-instructions/tooling-claude.md:/home/claude/devai/CLAUDE.md
       - ./shell-history/restricted-sandbox-history:/home/claude/.bash_history
+      - ./mcp-config/restricted-sandbox-mcp.json:/home/claude/.claude/mcp_settings.json
     working_dir: /home/claude/devai
     command: tail -f /dev/null
 
@@ -87,5 +89,6 @@ services:
       - ~/dev/drm/tooling/rm-utilities:/home/claude/devai/rm-utilities
       - ./sandbox-instructions/workspace1-claude.md:/home/claude/devai/CLAUDE.md
       - ./shell-history/workspace1-claude-history:/home/claude/.bash_history
+      - ./mcp-config/workspace1-claude-mcp.json:/home/claude/.claude/mcp_settings.json
     working_dir: /home/claude/devai
     command: tail -f /dev/null

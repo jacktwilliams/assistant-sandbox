@@ -1,0 +1,14 @@
+{
+  "mcpServers": {
+    "idigitesting-mcp": {
+      "command": "/home/claude/.claude/mcp-tcp-proxy.sh",
+      "args": [],
+      "env": {
+        "MCP_HOST": "host.docker.internal",
+        "MCP_PORT": "3001",
+        "MCP_SERVER_NAME": "idigitesting-mcp",
+        "CONTAINER_NAME": "restricted-sandbox"
+      }
+    }
+  }
+}
